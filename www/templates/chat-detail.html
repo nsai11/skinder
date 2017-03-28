@@ -1,0 +1,52 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="Active Post">
+  <ion-content class="padding"
+               has-bouncing="true">
+    <div ng-repeat="message in messages" class="message-wrapper">
+      <!-- from sender-->
+      <div ng-if="message.sender !== user.userKey" ng-style="unSeenBackground">
+        <img class="profile-pic left" ng-src="{{ message.picture }}" />
+        <div class="chat-bubble left">
+          <div class="message" ng-bind-html="message.text" >
+          </div>
+          <div class="message-detail">
+            {{message.timestamp | date:'medium'}}
+          </div>
+        </div>
+
+      </div>
+      <!--from user text-->
+      <div ng-if="message.sender === user.userKey">
+        <img class="profile-pic right"
+             ng-src="{{ message.picture }}" />
+        <div class="chat-bubble right">
+          <div class="message" ng-bind-html="message.text" >
+          </div>
+          <div class="message-detail">
+            {{message.timestamp | date:'medium'}}
+          </div>
+        </div>
+      </div>
+     <div class="cf"></div>
+    </div>
+  </ion-content>
+   <ion-footer-bar class="bar-stable item-input-inset message-footer">
+     <label class="item-input-wrapper">
+       <textarea msd-elastic type="text" placeholder="your message" ng-model="message" ng-focus="markSeen()">
+       </textarea>
+     </label>
+     <div class="footer-btn-wrap">
+       <button class="button button-icon icon ion-android-send footer-btn"
+               type="submit"
+               ng-click="sendMessage()"
+               ng-disabled="!message || message === ''">
+       </button>
+     </div>
+   </ion-footer-bar>
+
+</ion-view>

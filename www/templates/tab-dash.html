@@ -1,0 +1,117 @@
+<ion-view view-title="Posts">
+	<ion-content>
+		<div>
+		<!--user profile image-->
+		<div style="position: absolute; top: 1em; left: 0.3em; z-index: 19;">
+			<img ng-src="{{ user.picture }}" style="width: 5em; height: 5em; border-radius: 50%; box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.5);"/>
+		</div>
+			<!--radius indicator-
+		<div id="range-indicator">
+			<h2 style="text-align: center; margin-top: 25%; color: white;">
+			
+			</h2>
+		</div>-->
+
+		<!--map-
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events" draggable="true">
+				<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+				</ui-gmap-marker>
+				<ui-gmap-circle
+					ng-repeat="c in circles track by c.id"
+					center="c.center"
+					stroke="c.stroke"
+					fill="c.fill"
+					radius="c.radius">
+				</ui-gmap-circle>
+
+			</ui-gmap-google-map>-->
+			<!--radius-->
+		<div class="range" id="radius-range" >
+		  <input type="number" name="volume"  value="500" ng-model="radius">
+		</div>
+
+	</div>
+		<!--post list-->
+		  <ion-list can-swipe="listCanSwipe" show-delete="control.showDelete">
+		    <ion-item ng-repeat="post in posts" ui-sref="tab.chats({ postId: post.postID })">
+			    <ion-delete-button class="ion-minus-circled"
+                             ng-show="post.postData.createdBy === userKey"
+                             ng-click="deletePost(post.postID)"
+                             >
+          </ion-delete-button>
+          <div class="card">
+					  <div class="item item-text-wrap">
+					    <h2>{{ post.postData.name }}
+                <span ng-if="post.postID === activePost">
+                  <i class="icon ion-chatbubble"></i>
+                </span>
+              </h2>
+					  </div>
+					</div>
+		    </ion-item>
+		  </ion-list>
+	</ion-content>
+  <!-- delete button-->
+  <a id="deleteButton" class="button button-icon icon ion-trash-b"
+          ng-click="control.showDelete = !control.showDelete"></a>
+	<!--create post button-->
+	<a ui-sref="tab.createPost" id="createButton" class="button button-energized">
+		<i class="icon ion-plus-round custom-create-icon"></i>
+	</a>
+</ion-view>
+<!--style for google map-->
+<style>
+	/*.angular-google-map,
+	.angular-google-map-container {
+		height: 22em;
+	}
+
+	#range-indicator{
+		position: absolute;
+		top: 7em;
+		left: 0.3em;
+		height: 5em;
+		width: 5em;
+		border-radius: 50%;
+		box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.5);
+		background-color: #00bcd4;
+		z-index: 19;
+	}*/
+  .ion-chatbubble{
+    color: #f50057;
+    float: right;
+    font-size: 3em;
+  }
+  .ion-close{
+    color: #f50057;
+    float: right;
+    font-size: 2em;
+  }
+  #deleteButton{
+    position: absolute;
+    bottom: 4em;
+    right: 1em;
+    z-index: 19;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);
+  }
+  .ion-trash-b{
+    color: #f50057;
+    font-size: 2em;
+  }
+  #createButton{
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  z-index: 19;
+  height: 4.5em;
+  width: 4.5em;
+  border-radius: 50%;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);  }
+  .ion-plus-round{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+</style>

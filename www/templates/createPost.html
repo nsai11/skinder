@@ -1,0 +1,36 @@
+<ion-view view-title="create Post">
+	<ion-content scroll="false">
+		<div>
+			<form action="">
+				<div class="list">
+					<label class="item item-input item-floating-label">
+						<h2 style="color: red">{{ errorMes }}</h2>
+						<span class="input-label">Enter Post</span>
+						<input type="text" placeholder="Post" ng-model="newPost.name">
+					</label>
+					<!--range when select private checkbox-->
+					<div class="range">
+						<!--<h2>{{ newPost.range }} m</h2>-->
+						<input type="number" name="volume" value="500" ng-model="newPost.range">
+					</div>
+					<!--create button-->
+					<a class="button button-block button-assertive" ng-click="createPost()"> Create your Post
+					</a>
+				</div>
+			</form>
+		</div>
+
+  </ion-content>
+</ion-view>
+<!-- successInfo modal-->
+<script id="successInfo.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar-balanced">
+      <h1 class="title">Your post is Successful created</h1>
+    </ion-header-bar>
+    <ion-content>
+      <button ui-sref="tab.dash" ng-click="closeModal()">Go Back to Posts Dash board</button>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
